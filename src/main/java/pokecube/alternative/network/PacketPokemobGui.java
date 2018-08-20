@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import pokecube.alternative.container.belt.BeltPlayerData;
+import pokecube.alternative.event.EventHandlerCommon;
 import pokecube.core.items.pokecubes.PokecubeManager;
 import thut.lib.CompatWrapper;
 
@@ -69,6 +70,7 @@ public class PacketPokemobGui implements IMessage, IMessageHandler<PacketPokemob
             {
                 ItemStack stack = cap.getCube(i);
                 PokecubeManager.heal(stack);
+                EventHandlerCommon.syncPokemon(player);
             }
         }
         else

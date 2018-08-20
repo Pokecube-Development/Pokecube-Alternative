@@ -37,6 +37,8 @@ public class Config extends ConfigBase
     public String           beltOffsetSneak = "0.0 0.13125 -0.105";
     @Configure(category = "client")
     public boolean          cooldownMeter   = true;
+    @Configure(category = "client")
+    public boolean          overrideGui     = true;
 
     @Configure(category = "misc")
     public boolean          autoThrow       = true;

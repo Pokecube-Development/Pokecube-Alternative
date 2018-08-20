@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -21,6 +22,7 @@ import pokecube.core.events.handlers.EventsHandlerClient;
 import pokecube.core.interfaces.IPokemob;
 import pokecube.core.interfaces.IPokemob.Stats;
 import pokecube.core.items.pokecubes.PokecubeManager;
+import pokecube.core.utils.TagNames;
 import pokecube.core.utils.Tools;
 import thut.lib.CompatWrapper;
 
@@ -112,12 +114,13 @@ public class GuiPokemonBar extends Gui
                 this.drawTexturedModalRect(selectorXPos, selectorYPos, 38, 0, 75, 26);
                 this.drawTexturedModalRect(0, selectorYPos, 0, 0, 10, 26);
 
+                NBTTagCompound pokeTag = pokemonItemstack.getTagCompound().getCompoundTag(TagNames.POKEMOB);
                 // Draw health
                 selectorXPos = i + 18;
                 selectorYPos = j - 6;
                 this.mc.renderEngine.bindTexture(bar);
                 int healthLength = 56;
-                float relHp = ((float) realMob.getStat(Stats.HP, true)) / realMob.getStat(Stats.HP, false);
+                float relHp = ((float) pokeTag.getFloat("Health")) / realMob.getStat(Stats.HP, false);
                 this.drawTexturedModalRect(selectorXPos, selectorYPos, 2, 197, (int) (healthLength * relHp), 3);
 
                 // Draw EXP

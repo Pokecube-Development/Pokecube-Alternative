@@ -75,6 +75,7 @@ public class EventHandlerCommon
                         if (itemID.equals(cap.getSlotID(i)))
                         {
                             cap.setCube(i, item);
+                            player.inventory.setInventorySlotContents(slotIndex, ItemStack.EMPTY);
                             toBelt = true;
                             break;
                         }
@@ -95,6 +96,9 @@ public class EventHandlerCommon
                         player.sendMessage(new TextComponentTranslation(Reference.MODID + ".pokebelt.tobelt",
                                 item.getDisplayName()));
                     }
+                    ((EntityPlayerMP) player).sendAllContents(player.inventoryContainer,
+                            player.inventoryContainer.inventoryItemStacks);
+                    syncPokemon(player);
                     event.setCanceled(true);
                 }
             }

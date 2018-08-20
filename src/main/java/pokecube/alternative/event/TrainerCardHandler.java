@@ -16,6 +16,7 @@ public class TrainerCardHandler
     @SubscribeEvent
     public void PlayerUseItemEvent(PlayerInteractEvent.RightClickItem event)
     {
+        if (Config.instance.isEnabled) return;
         ItemStack item = event.getItemStack();
         EntityPlayer player = event.getEntityPlayer();
         if (player.world.isRemote) return;
