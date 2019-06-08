@@ -5,9 +5,9 @@ import java.io.IOException;
 import javax.xml.ws.handler.MessageContext;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -19,11 +19,11 @@ import thut.lib.CompatWrapper;
 
 public class PacketPokemobGui implements IMessage, IMessageHandler<PacketPokemobGui, IMessage>
 {
-    public NBTTagCompound data;
+    public CompoundNBT data;
 
     public PacketPokemobGui()
     {
-        data = new NBTTagCompound();
+        data = new CompoundNBT();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class PacketPokemobGui implements IMessage, IMessageHandler<PacketPokemob
         return null;
     }
 
-    void processMessage(EntityPlayerMP player, PacketPokemobGui message)
+    void processMessage(ServerPlayerEntity player, PacketPokemobGui message)
     {
         BeltPlayerData cap = BeltPlayerData.getBelt(player);
         boolean heal = message.data.getBoolean("H");

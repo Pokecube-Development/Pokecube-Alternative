@@ -1,6 +1,6 @@
 package pokecube.alternative.event;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,7 +18,7 @@ public class TrainerCardHandler
     {
         if (Config.instance.isEnabled) return;
         ItemStack item = event.getItemStack();
-        EntityPlayer player = event.getEntityPlayer();
+        PlayerEntity player = event.getPlayerEntity();
         if (player.world.isRemote) return;
         if (Config.instance.trainerCard && ItemBadge.isBadge(item))
         {
@@ -34,7 +34,7 @@ public class TrainerCardHandler
                 }
             }
             if (index == -1 || CompatWrapper.isValid(data.inventory.getStackInSlot(index))) return;
-            int slotIndex = event.getEntityPlayer().inventory.currentItem;
+            int slotIndex = event.getPlayerEntity().inventory.currentItem;
             data.inventory.setInventorySlotContents(index, item.copy());
             player.inventory.setInventorySlotContents(slotIndex, ItemStack.EMPTY);
             PlayerDataHandler.getInstance().save(player.getCachedUniqueIdString(), data.getIdentifier());

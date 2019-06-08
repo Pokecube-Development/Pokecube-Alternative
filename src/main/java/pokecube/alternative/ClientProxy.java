@@ -1,13 +1,13 @@
 package pokecube.alternative;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLCommonSetupEvent;
 import pokecube.alternative.client.gui.GuiCard;
 import pokecube.alternative.client.gui.GuiEvents;
 import pokecube.alternative.client.gui.GuiPokemonBar;
@@ -17,7 +17,7 @@ public class ClientProxy extends CommonProxy
 {
 
     @Override
-    public void preInit(FMLPreInitializationEvent event)
+    public void preInit(FMLCommonSetupEvent event)
     {
         super.preInit(event);
         KeyHandler.init();
@@ -35,11 +35,11 @@ public class ClientProxy extends CommonProxy
     public void postInit(FMLPostInitializationEvent event)
     {
         super.postInit(event);
-        MinecraftForge.EVENT_BUS.register(new GuiPokemonBar(Minecraft.getMinecraft()));
+        MinecraftForge.EVENT_BUS.register(new GuiPokemonBar(Minecraft.getInstance()));
     }
 
     @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    public Object getClientGuiElement(int ID, PlayerEntity player, World world, int x, int y, int z)
     {
         return new GuiCard(player);
     }

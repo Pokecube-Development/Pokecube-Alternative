@@ -2,8 +2,8 @@ package pokecube.alternative.container.card;
 
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.INBT;
+import net.minecraft.nbt.CompoundNBT;
 import thut.core.common.handlers.PlayerDataHandler.PlayerData;
 import thut.lib.CompatWrapper;
 
@@ -34,30 +34,30 @@ public class CardPlayerData extends PlayerData
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt)
+    public void writeToNBT(CompoundNBT nbt)
     {
         for (int n = 0; n < inventory.getSizeInventory(); n++)
         {
             ItemStack i = inventory.getStackInSlot(n);
             if (CompatWrapper.isValid(i))
             {
-                NBTTagCompound tag = new NBTTagCompound();
+                CompoundNBT tag = new CompoundNBT();
                 i.writeToNBT(tag);
-                nbt.setTag("slot" + n, tag);
+                nbt.put("slot" + n, tag);
             }
         }
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt)
+    public void readFromNBT(CompoundNBT nbt)
     {
-        NBTTagCompound compound = nbt;
+        CompoundNBT compound = nbt;
         for (int n = 0; n < inventory.getSizeInventory(); n++)
         {
-            NBTBase temp = compound.getTag("slot" + n);
-            if (temp instanceof NBTTagCompound)
+            INBT temp = compound.getTag("slot" + n);
+            if (temp instanceof CompoundNBT)
             {
-                NBTTagCompound tag = (NBTTagCompound) temp;
+                CompoundNBT tag = (CompoundNBT) temp;
                 inventory.setInventorySlotContents(n, new ItemStack(tag));
             }
         }

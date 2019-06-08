@@ -1,6 +1,6 @@
 package pokecube.alternative.container.card;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import pokecube.adventures.items.ItemBadge;
@@ -10,7 +10,7 @@ import thut.core.common.handlers.PlayerDataHandler;
 
 public class ContainerCard extends Container
 {
-    public ContainerCard(EntityPlayer player)
+    public ContainerCard(PlayerEntity player)
     {
         InventoryBasic inv = PlayerDataHandler.getInstance().getPlayerData(player)
                 .getData(CardPlayerData.class).inventory;
@@ -41,7 +41,7 @@ public class ContainerCard extends Container
                 }
 
                 @Override
-                public boolean canTakeStack(EntityPlayer playerIn)
+                public boolean canTakeStack(PlayerEntity playerIn)
                 {
                     return true;
                 }
@@ -50,7 +50,7 @@ public class ContainerCard extends Container
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer playerIn)
+    public boolean canInteractWith(PlayerEntity playerIn)
     {
         return true;
     }

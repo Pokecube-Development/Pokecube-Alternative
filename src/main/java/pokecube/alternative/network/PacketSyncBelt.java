@@ -5,8 +5,8 @@ import javax.xml.ws.handler.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -37,7 +37,7 @@ public class PacketSyncBelt implements IMessage, IMessageHandler<PacketSyncBelt,
     public void toBytes(ByteBuf buffer)
     {
         buffer.writeInt(playerId);
-        NBTTagCompound nbt = new NBTTagCompound();
+        CompoundNBT nbt = new CompoundNBT();
         belt.writeToNBT(nbt);
         ByteBufUtils.writeTag(buffer, nbt);
     }
@@ -46,15 +46,15 @@ public class PacketSyncBelt implements IMessage, IMessageHandler<PacketSyncBelt,
     public void fromBytes(ByteBuf buffer)
     {
         playerId = buffer.readInt();
-        NBTTagCompound nbt = ByteBufUtils.readTag(buffer);
+        CompoundNBT nbt = ByteBufUtils.readTag(buffer);
         if (nbt != null) belt.readFromNBT(nbt);
     }
 
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final PacketSyncBelt message, MessageContext ctx)
     {
-        Minecraft.getMinecraft().addScheduledTask(new Runnable()
+        Minecraft.getInstance().addScheduledTask(new Runnable()
         {
             @Override
             public void run()
@@ -65,13 +65,13 @@ public class PacketSyncBelt implements IMessage, IMessageHandler<PacketSyncBelt,
         return null;
     }
 
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     void processMessage(PacketSyncBelt message)
     {
         World world = PokecubeAlternative.proxy.getClientWorld();
         if (world == null) return;
         Entity p = world.getEntityByID(message.playerId);
-        if (p != null && p instanceof EntityPlayer)
+        if (p != null && p instanceof PlayerEntity)
         {
             BeltPlayerData cap = BeltPlayerData.getBelt(p);
             BeltPlayerData capData = (BeltPlayerData) p.getCapability(CapabilityHasPokemobs.HASPOKEMOBS_CAP, null);

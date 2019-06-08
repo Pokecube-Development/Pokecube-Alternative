@@ -103,7 +103,7 @@ public class KeyHandler
             }
             else
             {
-                IPokemobBelt cap = BeltPlayerData.getBelt(Minecraft.getMinecraft().player);
+                IPokemobBelt cap = BeltPlayerData.getBelt(Minecraft.getInstance().player);
                 boolean send = CompatWrapper.isValid(cap.getCube(cap.getSlot()));
                 if (send) ticks = Minecraft.getSystemTime();
                 else

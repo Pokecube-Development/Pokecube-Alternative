@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.UUID;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.INBT;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
@@ -21,34 +21,34 @@ import pokecube.core.interfaces.IPokemob;
 import thut.core.common.handlers.PlayerDataHandler.PlayerData;
 import thut.lib.CompatWrapper;
 
-public class BeltPlayerData extends PlayerData implements IPokemobBelt, IHasPokemobs, INBTSerializable<NBTTagCompound>
+public class BeltPlayerData extends PlayerData implements IPokemobBelt, IHasPokemobs, INBTSerializable<CompoundNBT>
 {
-    public static class CapWrapper implements ICapabilitySerializable<NBTTagCompound>
+    public static class CapWrapper implements ICapabilitySerializable<CompoundNBT>
     {
         public BeltPlayerData data;
 
         @Override
-        public NBTTagCompound serializeNBT()
+        public CompoundNBT serializeNBT()
         {
-            NBTTagCompound nbt = new NBTTagCompound();
+            CompoundNBT nbt = new CompoundNBT();
             if (data != null) data.writeToNBT(nbt);
             return nbt;
         }
 
         @Override
-        public void deserializeNBT(NBTTagCompound nbt)
+        public void deserializeNBT(CompoundNBT nbt)
         {
             if (data != null) data.readFromNBT(nbt);
         }
 
         @Override
-        public boolean hasCapability(Capability<?> capability, EnumFacing facing)
+        public boolean hasCapability(Capability<?> capability, Direction facing)
         {
             return data != null && capability == CapabilityHasPokemobs.HASPOKEMOBS_CAP;
         }
 
         @Override
-        public <T> T getCapability(Capability<T> capability, EnumFacing facing)
+        public <T> T getCapability(Capability<T> capability, Direction facing)
         {
             if (hasCapability(capability, facing)) return CapabilityHasPokemobs.HASPOKEMOBS_CAP.cast(data);
             return null;
@@ -99,47 +99,47 @@ public class BeltPlayerData extends PlayerData implements IPokemobBelt, IHasPoke
 
     /** These methods are for capability syncing. */
     @Override
-    public NBTTagCompound serializeNBT()
+    public CompoundNBT serializeNBT()
     {
-        NBTTagCompound nbt = new NBTTagCompound();
+        CompoundNBT nbt = new CompoundNBT();
         writeToNBT(nbt);
         return nbt;
     }
 
     @Override
-    public void deserializeNBT(NBTTagCompound nbt)
+    public void deserializeNBT(CompoundNBT nbt)
     {
         readFromNBT(nbt);
     }
 
     /** These methods are for playerdata saving/loading. */
     @Override
-    public void writeToNBT(NBTTagCompound nbt)
+    public void writeToNBT(CompoundNBT nbt)
     {
         for (int n = 0; n < 6; n++)
         {
             ItemStack i = getCube(n);
             if (CompatWrapper.isValid(i))
             {
-                NBTTagCompound tag = new NBTTagCompound();
+                CompoundNBT tag = new CompoundNBT();
                 i.writeToNBT(tag);
-                nbt.setTag("slot" + n, tag);
+                nbt.put("slot" + n, tag);
             }
         }
         nbt.setInteger("selectedSlot", getSlot());
-        nbt.setString("type", getType().name);
+        nbt.putString("type", getType().name);
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt)
+    public void readFromNBT(CompoundNBT nbt)
     {
-        NBTTagCompound compound = nbt;
+        CompoundNBT compound = nbt;
         for (int n = 0; n < 6; n++)
         {
-            NBTBase temp = compound.getTag("slot" + n);
-            if (temp instanceof NBTTagCompound)
+            INBT temp = compound.getTag("slot" + n);
+            if (temp instanceof CompoundNBT)
             {
-                NBTTagCompound tag = (NBTTagCompound) temp;
+                CompoundNBT tag = (CompoundNBT) temp;
                 setCube(n, new ItemStack(tag));
             }
         }
@@ -218,7 +218,7 @@ public class BeltPlayerData extends PlayerData implements IPokemobBelt, IHasPoke
     }
 
     @Override
-    public EntityLivingBase getTarget()
+    public LivingEntity getTarget()
     {
         // Nope
         return null;
@@ -237,7 +237,7 @@ public class BeltPlayerData extends PlayerData implements IPokemobBelt, IHasPoke
     }
 
     @Override
-    public void setTarget(EntityLivingBase target)
+    public void setTarget(LivingEntity target)
     {
         // Nope
     }
@@ -320,7 +320,7 @@ public class BeltPlayerData extends PlayerData implements IPokemobBelt, IHasPoke
     }
 
     @Override
-    public boolean canBattle(EntityLivingBase target)
+    public boolean canBattle(LivingEntity target)
     {
         // Nope
         return true;

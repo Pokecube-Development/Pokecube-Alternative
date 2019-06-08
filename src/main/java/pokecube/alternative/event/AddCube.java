@@ -1,6 +1,6 @@
 package pokecube.alternative.event;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.EntityEvent;
 import pokecube.alternative.container.belt.BeltPlayerData;
@@ -11,7 +11,7 @@ public class AddCube extends EntityEvent
     public final ItemStack    cube;
     public final IPokemobBelt cap;
 
-    public AddCube(EntityPlayer player, ItemStack cube)
+    public AddCube(PlayerEntity player, ItemStack cube)
     {
         super(player);
         this.cap = BeltPlayerData.getBelt(player);
@@ -20,7 +20,7 @@ public class AddCube extends EntityEvent
 
     public static class OnRecall extends AddCube
     {
-        public OnRecall(EntityPlayer player, ItemStack cube)
+        public OnRecall(PlayerEntity player, ItemStack cube)
         {
             super(player, cube);
         }

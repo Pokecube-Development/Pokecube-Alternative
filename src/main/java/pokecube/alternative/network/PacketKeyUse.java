@@ -6,10 +6,10 @@ import javax.xml.ws.handler.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -76,7 +76,7 @@ public class PacketKeyUse implements IMessage, IMessageHandler<PacketKeyUse, IMe
         return null;
     }
 
-    void processMessage(EntityPlayer player, PacketKeyUse message)
+    void processMessage(PlayerEntity player, PacketKeyUse message)
     {
         BeltPlayerData cap = BeltPlayerData.getBelt(player);
         if (message.messageId == OPENCARD)
@@ -88,7 +88,7 @@ public class PacketKeyUse implements IMessage, IMessageHandler<PacketKeyUse, IMe
         {
             int id = message.ticks;
             Entity entity = player.getEntityWorld().getEntityByID(id);
-            if (entity instanceof EntityLivingBase) player.interactOn(entity, EnumHand.MAIN_HAND);
+            if (entity instanceof LivingEntity) player.interactOn(entity, Hand.MAIN_HAND);
             return;
         }
         if (message.messageId == SENDOUT)

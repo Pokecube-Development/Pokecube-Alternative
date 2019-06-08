@@ -14,10 +14,10 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import pokecube.alternative.Config;
@@ -50,13 +50,13 @@ public class GuiBattleHandler
         if (!Config.instance.overrideGui) return;
         IPokemob pokemob = GuiDisplayPokecubeInfo.instance().getCurrentPokemob();
         if (pokemob == null) return;
-        Minecraft mc = Minecraft.getMinecraft();
+        Minecraft mc = Minecraft.getInstance();
         GlStateManager.pushMatrix();
         GL11.glTranslated(27, 6, 0);
         GuiDisplayPokecubeInfo.guiDims[0] = 60;
         GuiDisplayPokecubeInfo.applyTransform(PokecubeCore.core.getConfig().guiRef, PokecubeMod.core.getConfig().guiPos,
                 GuiDisplayPokecubeInfo.guiDims, PokecubeMod.core.getConfig().guiSize);
-        EntityLivingBase entity = pokemob.getEntity();
+        LivingEntity entity = pokemob.getEntity();
         float scale = 1.5f;
         GlStateManager.scale(scale, scale, scale);
         GL11.glTranslated(9, -2, 0);
@@ -202,7 +202,7 @@ public class GuiBattleHandler
         if (!Config.instance.overrideGui) return;
         IPokemob pokemob = GuiDisplayPokecubeInfo.instance().getCurrentPokemob();
         if (pokemob == null) return;
-        EntityLivingBase entity = pokemob.getEntity().getAttackTarget();
+        LivingEntity entity = pokemob.getEntity().getAttackTarget();
         if (entity == null) return;
         GlStateManager.pushMatrix();
         GL11.glTranslated(27, 6, 0);
@@ -215,7 +215,7 @@ public class GuiBattleHandler
         drawHealth(entity);
         if (pokemob.getStatus() != IPokemob.STATUS_NON)
         {
-            Minecraft.getMinecraft().renderEngine.bindTexture(Resources.GUI_BATTLE);
+            Minecraft.getInstance().renderEngine.bindTexture(Resources.GUI_BATTLE);
             byte status = pokemob.getStatus();
             float x = 26.5f;
             float y = -6.5f;
@@ -258,20 +258,20 @@ public class GuiBattleHandler
         evt.setCanceled(true);
     }
 
-    private void drawHealth(EntityLivingBase entity)
+    private void drawHealth(LivingEntity entity)
     {
         if (!Config.instance.isEnabled) return;
         if (!Config.instance.overrideGui) return;
         IPokemob pokemob = CapabilityPokemob.getPokemobFor(entity);
         if (entity == null) { return; }
-        Minecraft mc = Minecraft.getMinecraft();
+        Minecraft mc = Minecraft.getInstance();
         processing:
         {
             float maxHealth = entity.getMaxHealth();
             float health = Math.min(maxHealth, entity.getHealth());
 
             if (maxHealth <= 0) break processing;
-            RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
+            RenderManager renderManager = Minecraft.getInstance().getRenderManager();
 
             GlStateManager.pushMatrix();
             GL11.glNormal3f(0.0F, 1.0F, 0.0F);
@@ -307,7 +307,7 @@ public class GuiBattleHandler
             GlStateManager.translate(0F, 0f, 0F);
             ITextComponent nameComp = entity.getDisplayName();
             if (entity.hasCustomName())
-                nameComp = new TextComponentString(TextFormatting.ITALIC + entity.getCustomNameTag());
+                nameComp = new StringTextComponent(TextFormatting.ITALIC + entity.getCustomNameTag());
             float s = 0.5F;
             String name = I18n.format(nameComp.getFormattedText());
             float namel = mc.fontRenderer.getStringWidth(name) * s;

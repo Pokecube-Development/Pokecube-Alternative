@@ -10,7 +10,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import pokecube.alternative.Reference;
 import pokecube.alternative.container.belt.ContainerPlayerPokemon;
@@ -25,7 +25,7 @@ public class GuiPlayerPokemon extends InventoryEffectRenderer
 
     final GuiScreen                      baseGui;
 
-    public GuiPlayerPokemon(EntityPlayer player, GuiScreen base)
+    public GuiPlayerPokemon(PlayerEntity player, GuiScreen base)
     {
         super(new ContainerPlayerPokemon(player.inventory, !player.world.isRemote, player));
         this.baseGui = base;

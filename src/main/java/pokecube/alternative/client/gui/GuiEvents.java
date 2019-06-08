@@ -42,7 +42,7 @@ public class GuiEvents
     GuiScreen        lastcontainer;
     GuiPlayerPokemon gui;
 
-    @SideOnly(value = Side.CLIENT)
+    @OnlyIn(value = Dist.CLIENT)
     @SubscribeEvent
     public void guiEvent(GuiScreenEvent event)
     {
@@ -55,7 +55,7 @@ public class GuiEvents
             if (event.getGui() != lastcontainer)
             {
                 int[] offset = whitelistedGuis.get(event.getGui().getClass().getName());
-                gui = new GuiPlayerPokemon(Minecraft.getMinecraft().player, event.getGui());
+                gui = new GuiPlayerPokemon(Minecraft.getInstance().player, event.getGui());
                 lastcontainer = event.getGui();
                 gui.initToOther(lastcontainer);
                 gui.guiTop += offset[0];
@@ -82,7 +82,7 @@ public class GuiEvents
                 if (guiClass.equals("pokecube.core.client.gui.blocks.GuiHealTable"))
                 {
                     PacketPokemobGui packet = new PacketPokemobGui();
-                    packet.data.setBoolean("H", true);
+                    packet.data.putBoolean("H", true);
                     PacketHandler.INSTANCE.sendToServer(packet);
                 }
             }

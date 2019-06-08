@@ -36,11 +36,11 @@ public class PacketSyncEnabled implements IMessage, IMessageHandler<PacketSyncEn
         var = buffer.readBoolean();
     }
 
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final PacketSyncEnabled message, MessageContext ctx)
     {
-        Minecraft.getMinecraft().addScheduledTask(new Runnable()
+        Minecraft.getInstance().addScheduledTask(new Runnable()
         {
             @Override
             public void run()
@@ -51,7 +51,7 @@ public class PacketSyncEnabled implements IMessage, IMessageHandler<PacketSyncEn
         return null;
     }
 
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     void processMessage(PacketSyncEnabled message)
     {
         if (PokecubeMod.debug) PokecubeMod.log("Setting Enabled State to: " + message.var);

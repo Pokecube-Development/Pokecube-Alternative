@@ -1,6 +1,6 @@
 package pokecube.alternative.container.belt;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import pokecube.core.items.pokecubes.PokecubeManager;
@@ -22,7 +22,7 @@ public class SlotPokemon extends Slot
     }
 
     @Override
-    public boolean canTakeStack(EntityPlayer player)
+    public boolean canTakeStack(PlayerEntity player)
     {
         return CompatWrapper.isValid(this.getStack());
     }

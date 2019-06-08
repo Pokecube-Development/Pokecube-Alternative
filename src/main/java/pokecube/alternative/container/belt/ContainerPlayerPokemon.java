@@ -1,6 +1,6 @@
 package pokecube.alternative.container.belt;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.ClickType;
@@ -12,9 +12,9 @@ public class ContainerPlayerPokemon extends Container
     public InventoryPokemon pokemon;
     /** Determines if inventory manipulation should be handled. */
     public boolean          isLocalWorld;
-    final EntityPlayer      thePlayer;
+    final PlayerEntity      thePlayer;
 
-    public ContainerPlayerPokemon(InventoryPlayer playerInv, boolean par2, EntityPlayer player)
+    public ContainerPlayerPokemon(InventoryPlayer playerInv, boolean par2, PlayerEntity player)
     {
         this.isLocalWorld = par2;
         this.thePlayer = player;
@@ -34,7 +34,7 @@ public class ContainerPlayerPokemon extends Container
 
     /** Called when the container is closed. */
     @Override
-    public void onContainerClosed(EntityPlayer player)
+    public void onContainerClosed(PlayerEntity player)
     {
         super.onContainerClosed(player);
         if (!player.world.isRemote)
@@ -44,13 +44,13 @@ public class ContainerPlayerPokemon extends Container
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+    public boolean canInteractWith(PlayerEntity par1PlayerEntity)
     {
         return true;
     }
 
     @Override
-    public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player)
+    public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player)
     {
         return super.slotClick(slotId, dragType, clickTypeIn, player);
     }
@@ -58,7 +58,7 @@ public class ContainerPlayerPokemon extends Container
     /** Called when a player shift-clicks on a slot. You must override this or
      * you will crash when someone does that. */
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    public ItemStack transferStackInSlot(PlayerEntity par1PlayerEntity, int par2)
     {
         Slot slot = this.inventorySlots.get(par2);
         return slot.getStack();

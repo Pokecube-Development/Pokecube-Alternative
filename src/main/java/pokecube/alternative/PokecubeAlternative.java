@@ -2,7 +2,7 @@ package pokecube.alternative;
 
 import java.util.Map;
 
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLCommonSetupEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.network.NetworkCheckHandler;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
@@ -35,7 +35,7 @@ public class PokecubeAlternative
     public static PokecubeAlternative instance;
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event)
+    public void preInit(FMLCommonSetupEvent event)
     {
         Config.instance = new Config(PokecubeMod.core.getPokecubeConfig(event).getConfigFile());
         Config.instance.isEnabled = Config.instance.use;
@@ -79,8 +79,8 @@ public class PokecubeAlternative
      * @param event */
     public void PlayerLoggedInEvent(PlayerLoggedInEvent event)
     {
-        if (!Config.instance.isEnabled) if (event.player instanceof EntityPlayerMP) PacketHandler.INSTANCE
-                .sendTo(new PacketSyncEnabled(Config.instance.isEnabled), (EntityPlayerMP) event.player);
+        if (!Config.instance.isEnabled) if (event.player instanceof ServerPlayerEntity) PacketHandler.INSTANCE
+                .sendTo(new PacketSyncEnabled(Config.instance.isEnabled), (ServerPlayerEntity) event.player);
     }
 
     @NetworkCheckHandler
@@ -88,12 +88,12 @@ public class PokecubeAlternative
     {
         if (!args.containsKey(Reference.MODID))
         {
-            if (side == Side.SERVER)
+            if (side == Dist.DEDICATED_SERVER)
             {
                 if (PokecubeMod.debug) PokecubeMod.log("Alternative not found on server, Disabling for this session.");
                 Config.instance.isEnabled = false;
             }
-            if (side == Side.CLIENT && Config.instance.use)
+            if (side == Dist.CLIENT && Config.instance.use)
             {
                 if (PokecubeMod.debug) PokecubeMod.log(
                         "Client does not have alternative, which is enabled, This is bad, won't allow connection.");

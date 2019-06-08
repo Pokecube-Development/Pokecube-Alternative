@@ -9,8 +9,8 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import pokecube.alternative.Config;
@@ -34,7 +34,7 @@ public class GuiCard extends InventoryEffectRenderer
     /** The old y position of the mouse pointer */
     private float                        oldMouseY;
 
-    public GuiCard(EntityPlayer player)
+    public GuiCard(PlayerEntity player)
     {
         super(new ContainerCard(player));
     }
@@ -90,7 +90,7 @@ public class GuiCard extends InventoryEffectRenderer
             if (!CompatWrapper.isValid(pokemonItemstack)) continue;
             IPokemob pokemob = EventsHandlerClient.getPokemobForRender(pokemonItemstack, mc.world);
             if (pokemob == null) continue;
-            EntityLiving entity = pokemob.getEntity();
+            MobEntity entity = pokemob.getEntity();
 
             // Set the mob's stance and rotation
             entity.rotationYaw = 0;
@@ -119,7 +119,7 @@ public class GuiCard extends InventoryEffectRenderer
             RenderHelper.enableStandardItemLighting();
             GL11.glTranslatef(0.0F, (float) entity.getYOffset(), 0.0F);
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j1 / 1.0F, k1 / 1.0F);
-            Minecraft.getMinecraft().getRenderManager().renderEntity(entity, 0, 0, 0, 0, 1.5F, false);
+            Minecraft.getInstance().getRenderManager().renderEntity(entity, 0, 0, 0, 0, 1.5F, false);
             RenderHelper.disableStandardItemLighting();
             GL11.glPopMatrix();
             GL11.glPopMatrix();

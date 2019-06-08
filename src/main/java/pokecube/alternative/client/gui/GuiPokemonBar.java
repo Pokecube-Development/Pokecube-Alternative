@@ -6,9 +6,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -67,7 +67,7 @@ public class GuiPokemonBar extends Gui
         boolean infoBarsForAll = showAllTags;
         boolean infoBarForSelected = showSelectedTag;
 
-        IPokemobBelt capability = BeltPlayerData.getBelt(Minecraft.getMinecraft().player);
+        IPokemobBelt capability = BeltPlayerData.getBelt(Minecraft.getInstance().player);
         int selected = capability.getSlot();
         int selectorSize = 28;
 
@@ -83,7 +83,7 @@ public class GuiPokemonBar extends Gui
             i = 14 + xPos;
             j = (yPos - 1) + (21 + selectorSize * pokemonNumber);
 
-            EntityLiving entity = null;
+            MobEntity entity = null;
             ItemStack pokemonItemstack = capability.getCube(pokemonNumber);
             if (!CompatWrapper.isValid(pokemonItemstack) && capability.getSlotID(pokemonNumber) == null) continue;
             IPokemob realMob = null;
@@ -114,7 +114,7 @@ public class GuiPokemonBar extends Gui
                 this.drawTexturedModalRect(selectorXPos, selectorYPos, 38, 0, 75, 26);
                 this.drawTexturedModalRect(0, selectorYPos, 0, 0, 10, 26);
 
-                NBTTagCompound pokeTag = pokemonItemstack.getTagCompound().getCompoundTag(TagNames.POKEMOB);
+                CompoundNBT pokeTag = pokemonItemstack.getTag().getCompound(TagNames.POKEMOB);
                 // Draw health
                 selectorXPos = i + 18;
                 selectorYPos = j - 6;
