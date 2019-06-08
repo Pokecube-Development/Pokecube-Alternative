@@ -145,12 +145,12 @@ public class GuiPokemonBar extends Gui
                 GL11.glScaled(1 / s, 1 / s, 1 / s);
 
                 // Draw gender
-                int colour = realMob.getSexe() == IPokemob.MALE ? 0x0011FF : 0xCC5555;
+                /*int colour = realMob.getSexe() == IPokemob.MALE ? 0x0011FF : 0xCC5555;
                 String gender = realMob.getSexe() == IPokemob.MALE ? "\u2642"
                         : realMob.getSexe() == IPokemob.FEMALE ? "\u2640" : "";
                 int sexX = -30;
                 int sexY = 10;
-                mc.fontRenderer.drawString(gender, sexX, sexY, colour);
+                mc.fontRenderer.drawString(gender, sexX, sexY, colour);*/
 
                 // Draw Level
                 s = 0.75f;

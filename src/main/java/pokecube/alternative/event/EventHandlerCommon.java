@@ -32,7 +32,7 @@ import pokecube.alternative.network.PacketHandler;
 import pokecube.alternative.network.PacketSyncBelt;
 import pokecube.alternative.network.PacketSyncEnabled;
 import pokecube.core.blocks.pc.InventoryPC;
-import pokecube.core.events.RecallEvent;
+import pokecube.core.events.pokemob.RecallEvent;
 import pokecube.core.events.handlers.PCEventsHandler;
 import pokecube.core.interfaces.IPokecube;
 import pokecube.core.interfaces.IPokemob;
