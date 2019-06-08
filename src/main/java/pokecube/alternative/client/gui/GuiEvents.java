@@ -2,10 +2,9 @@ package pokecube.alternative.client.gui;
 
 import java.util.Map;
 
-import org.lwjgl.input.Mouse;
-
 import com.google.common.collect.Maps;
 
+import net.java.games.input.Mouse;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -17,9 +16,9 @@ import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.KeyboardInputEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.MouseInputEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import pokecube.alternative.Config;
 import pokecube.alternative.network.PacketHandler;
 import pokecube.alternative.network.PacketPokemobGui;

@@ -3,7 +3,7 @@ package pokecube.alternative.event;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import pokecube.adventures.items.ItemBadge;
 import pokecube.alternative.Config;
 import pokecube.alternative.container.card.CardPlayerData;

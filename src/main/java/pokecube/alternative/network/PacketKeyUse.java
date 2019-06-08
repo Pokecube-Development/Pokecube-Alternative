@@ -2,6 +2,8 @@ package pokecube.alternative.network;
 
 import java.util.UUID;
 
+import javax.xml.ws.handler.MessageContext;
+
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,7 +13,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import pokecube.alternative.PokecubeAlternative;
 import pokecube.alternative.container.belt.BeltPlayerData;
 import pokecube.core.events.handlers.PCEventsHandler;

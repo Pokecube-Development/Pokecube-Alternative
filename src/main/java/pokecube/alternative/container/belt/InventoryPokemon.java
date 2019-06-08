@@ -3,7 +3,6 @@ package pokecube.alternative.container.belt;
 import java.lang.ref.WeakReference;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;

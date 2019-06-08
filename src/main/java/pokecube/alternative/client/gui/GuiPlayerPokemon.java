@@ -4,18 +4,18 @@ import java.io.IOException;
 
 import org.lwjgl.opengl.GL11;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 import pokecube.alternative.Reference;
 import pokecube.alternative.container.belt.ContainerPlayerPokemon;
-import pokecube.alternative.network.PacketPokemobGui;
 import pokecube.alternative.network.PacketHandler;
+import pokecube.alternative.network.PacketPokemobGui;
 
 public class GuiPlayerPokemon extends InventoryEffectRenderer
 {

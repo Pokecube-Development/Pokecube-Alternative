@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.logging.Level;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import pokecube.core.interfaces.PokecubeMod;
 import thut.core.common.config.ConfigBase;
 import thut.core.common.config.Configure;

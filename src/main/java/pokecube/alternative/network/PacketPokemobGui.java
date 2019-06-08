@@ -2,6 +2,8 @@ package pokecube.alternative.network;
 
 import java.io.IOException;
 
+import javax.xml.ws.handler.MessageContext;
+
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -10,7 +12,6 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import pokecube.alternative.container.belt.BeltPlayerData;
 import pokecube.alternative.event.EventHandlerCommon;
 import pokecube.core.items.pokecubes.PokecubeManager;
