@@ -7,7 +7,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import pokecube.alternative.client.gui.GuiCard;
 import pokecube.alternative.client.gui.GuiEvents;
 import pokecube.alternative.client.gui.GuiPokemonBar;

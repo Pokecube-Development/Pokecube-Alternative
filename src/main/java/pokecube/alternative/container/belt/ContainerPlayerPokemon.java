@@ -1,7 +1,7 @@
 package pokecube.alternative.container.belt;
 
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.ClickType;
 import net.minecraft.item.ItemStack;

@@ -5,8 +5,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLCommonSetupEvent;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import pokecube.alternative.container.card.ContainerCard;
 import pokecube.alternative.event.EventHandlerCommon;
 

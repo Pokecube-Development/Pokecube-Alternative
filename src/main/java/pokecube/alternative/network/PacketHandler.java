@@ -1,8 +1,8 @@
 package pokecube.alternative.network;
 
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.api.distmarker.Dist;
 import pokecube.alternative.Reference;
 
 public class PacketHandler
