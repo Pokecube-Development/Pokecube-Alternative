@@ -76,7 +76,7 @@ public class PacketPokemobGui implements IMessage, IMessageHandler<PacketPokemob
         }
         else
         {
-            int index = message.data.getInteger("S");
+            int index = message.data.getInt("S");
             ItemStack stack = cap.getCube(index);
             if (CompatWrapper.isValid(stack) && !CompatWrapper.isValid(player.inventory.getItemStack()))
             {
