@@ -36,7 +36,7 @@ public class GuiPlayerPokemon extends InventoryEffectRenderer
     @Override
     public void updateScreen()
     {
-        this.updateActivePotionEffects();
+        this.updateActiveEffectInstances();
     }
 
     /** Adds the buttons (and other controls) to the screen in question. */
@@ -109,7 +109,7 @@ public class GuiPlayerPokemon extends InventoryEffectRenderer
         if (slot != null)
         {
             PacketPokemobGui packet = new PacketPokemobGui();
-            packet.data.setInteger("S", slot.slotNumber);
+            packet.data.putInt("S", slot.slotNumber);
             PacketHandler.INSTANCE.sendToServer(packet);
         }
     }

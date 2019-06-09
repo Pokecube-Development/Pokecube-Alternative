@@ -126,7 +126,7 @@ public class BeltPlayerData extends PlayerData implements IPokemobBelt, IHasPoke
                 nbt.put("slot" + n, tag);
             }
         }
-        nbt.setInteger("selectedSlot", getSlot());
+        nbt.putInt("selectedSlot", getSlot());
         nbt.putString("type", getType().name);
     }
 
